@@ -1,97 +1,66 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+ChemPro: Periodic Table & Chemistry Guide
 
-# Getting Started
+🚀 **Master Chemistry with an Interactive Periodic Table, Quizzes, and Insights!**
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## 🌟 **Overview**
+ChemPro is an innovative chemistry learning app designed for students, educators, and enthusiasts. It features an interactive periodic table, quizzes, in-depth element details, and AI-powered insights to enhance your learning experience. With a sleek interface, dynamic data fetching, and a secure PHP backend, ChemPro is your go-to chemistry companion.
 
-## Step 1: Start Metro
+## ✨ **Features**
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- 📂 **Interactive Periodic Table** – Explore all 118 elements with detailed information, atomic properties, and images.
+- 🎓 **Quizzes & Challenges** – Test your knowledge with True/False, multiple-choice, and drag-and-drop chemistry quizzes.
+- 📈 **Data & Insights** – Get AI-driven analysis on elements, trends, and learning progress.
+- 🗓 **Element Search & Filter** – Quickly find elements based on category, atomic number, or symbol.
+- ⚙️ **Customizable User Experience** – Adjust settings for a personalized learning journey.
+- 🌬️ **Dynamic Content Fetching** – Elements and quizzes update seamlessly from the database.
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## 🛠️ **Tech Stack**
 
-```sh
-# Using npm
-npm start
+- **Frontend:** React Native CLI (for Android & iOS)
+- **Backend:** PHP (with MySQL for data storage)
+- **Data Management:** SQL database for storing element details and quiz questions
+- **UI Design:** Modern, clean, and user-friendly layout
 
-# OR using Yarn
-yarn start
+## 🚀 **Installation & Setup**
+
+### **1️⃣ Clone the Repository**
+```bash
+git clone https://github.com/yourusername/chempro.git
+cd chempro
 ```
 
-## Step 2: Build and run your app
+### **2️⃣ Setup Backend (PHP & MySQL)**
+- Upload the `backend` folder to your PHP server (XAMPP, Laravel, etc.).
+- Import the provided SQL database file into MySQL.
+- Update `db_connection.php` with your database credentials.
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+### **3️⃣ Run the React Native App**
+- Install dependencies: `npm install`
+- Start the app: `npx react-native run-android` (for Android) or `npx react-native run-ios` (for iOS)
 
-### Android
+## 📸 **FIGMA SAMPLE Screenshots**
 
-```sh
-# Using npm
-npm run android
+| Periodic Table | Element Details | Quiz |
+|--------------|---------------|------|
+| ![Periodic Table](screenshots/periodic_table.png) | ![Element Details](screenshots/element_details.png) | ![Quiz](screenshots/quiz.png) |
 
-# OR using Yarn
-yarn android
-```
+| Insights | Settings | Search |
+|---------|----------|--------|
+| ![Insights](screenshots/insights.png) | ![Settings](screenshots/settings.png) | ![Search](screenshots/search.png) |
 
-### iOS
+## 💡 **Challenges & Learnings**
+Developing ChemPro came with key challenges, including:
+✔️ Implementing dynamic element data fetching.
+✔️ Designing an intuitive UI for an interactive periodic table.
+✔️ Ensuring smooth API integration for quizzes and user progress tracking.
+Through continuous development and testing, we built a powerful chemistry learning tool.
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+## 🚀 **Future Enhancements**
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+- 🔬 **Molecular Structure Visualizer** – 3D models of chemical compounds.
+- 📝 **AI-Generated Study Plans** – Personalized study schedules based on quiz performance.
+- 🛡️ **Offline Mode** – Access key content without an internet connection.
+- 🌐 **Multilingual Support** – Expand accessibility for global users.
 
-```sh
-bundle install
-```
+💬 **Have questions or feedback?** Open an issue or reach out! Happy learning! 📚🌬️🔬
 
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
