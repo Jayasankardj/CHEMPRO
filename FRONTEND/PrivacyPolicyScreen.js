@@ -1,130 +1,93 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native";
-import { Picker } from "@react-native-picker/picker";
-import LinearGradient from "react-native-linear-gradient";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import { launchImageLibrary } from "react-native-image-picker";
-import { API_BASE_URL } from "./config";
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const ProfileScreen = ({ navigation, route }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState(route.params?.email || "");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [gender, setGender] = useState("");
-  const [currentStudy, setCurrentStudy] = useState("");
-  const [profilePicture, setProfilePicture] = useState(null);
-
-  useEffect(() => {
-    fetch(`${API_BASE_URL}/fetchProfile.php`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === "success") {
-          setName(data.profile.name);
-          setDateOfBirth(data.profile.date_of_birth || "");
-          setGender(data.profile.gender || "");
-          setCurrentStudy(data.profile.current_study || "");
-          setProfilePicture(data.profile.profile_image ? `${API_BASE_URL}/${data.profile.profile_image}` : null);
-        } else {
-          alert(data.message);
-        }
-      })
-      .catch((error) => console.error("Error fetching profile:", error));
-  }, []);
-
-  const pickImage = () => {
-    launchImageLibrary({ mediaType: "photo" }, (response) => {
-      if (response.didCancel) return;
-      if (response.errorMessage) {
-        alert("Error selecting image: " + response.errorMessage);
-        return;
-      }
-      if (response.assets && response.assets.length > 0) {
-        const selectedImage = response.assets[0].uri;
-        setProfilePicture(selectedImage);
-        uploadImage(selectedImage);
-      }
-    });
-  };
-
-  const uploadImage = (imageUri) => {
-    const formData = new FormData();
-    formData.append("email", email);
-    formData.append("profile_picture", {
-      uri: imageUri,
-      type: "image/jpeg",
-      name: "profile.jpg",
-    });
-
-    fetch(`${API_BASE_URL}/uploadProfilePicture.php`, {
-      method: "POST",
-      body: formData,
-      headers: { "Content-Type": "multipart/form-data" },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === "success") {
-          alert("Profile picture updated!");
-        } else {
-          alert(data.message);
-        }
-      })
-      .catch((error) => console.error("Error uploading image:", error));
-  };
-
-  const handleSave = () => {
-    fetch(`${API_BASE_URL}/profile.php`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, date_of_birth: dateOfBirth, gender, current_study: currentStudy }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === "success") {
-          alert("Profile updated successfully!");
-          navigation.navigate("PeriodicTableScreen");
-        } else {
-          alert(data.message);
-        }
-      })
-      .catch((error) => console.error("Error updating profile:", error));
-  };
+const PrivacyPolicyScreen = () => {
+  const navigation = useNavigation();
 
   return (
-    <LinearGradient colors={["#78C4D4", "#147B96"]} style={styles.container}>
-      <TouchableOpacity style={styles.navButton} onPress={() => navigation.goBack()}>
-        <Icon name="arrow-forward" size={30} color="#000" />
+    <View style={styles.container}>
+      {/* CHEM PRO Logo */}
+      <View style={styles.logoContainer}>
+        <Text style={styles.logoText}>
+          <Text style={styles.chem}>CHEM</Text> <Text style={styles.pro}>PRO</Text>
+        </Text>
+      </View>
+
+      {/* Privacy Message Box */}
+      <View style={styles.privacyBox}>
+  <Text style={styles.privacyText}>
+    <Text style={styles.italic}>We value your privacy.</Text>{'\n'}
+    Your data is securely stored on your device and never shared with third parties.{'\n\n'}
+    
+    We do not misuse your data in any way. It is handled with the utmost security and used only for the intended purpose within the app.{'\n\n'}
+
+    <Text style={styles.italic}>Please contact support if you have any concerns.</Text>
+  </Text>
+</View>
+
+
+      {/* Back Button */}
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <Text style={styles.backText}>Back</Text>
       </TouchableOpacity>
-
-      <TouchableOpacity onPress={pickImage} style={styles.profilePictureContainer}>
-        {profilePicture ? (
-          <Image source={{ uri: profilePicture }} style={styles.profilePicture} />
-        ) : (
-          <Icon name="account-circle" size={100} color="#000" />
-        )}
-      </TouchableOpacity>
-
-      <Text style={styles.title}>Profile</Text>
-
-      <Text style={styles.label}>Name:</Text>
-      <TextInput style={styles.input} value={name} editable={false} />
-
-      <Text style={styles.label}>Email:</Text>
-      <TextInput style={styles.input} value={email} editable={false} />
-
-      <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-        <Text style={styles.saveText}>Save</Text>
-      </TouchableOpacity>
-    </LinearGradient>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, alignItems: "center", justifyContent: "center" },
-  profilePicture: { width: 100, height: 100, borderRadius: 50, borderWidth: 2, borderColor: "#fff" },
+  container: {
+    flex: 1,
+    backgroundColor: '#71d4ff', // Light blue gradient effect
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+  logoContainer: {
+    marginBottom: 90 , 
+    borderWidth: 2,
+    borderColor: 'black',
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    borderRadius: 5,
+  },
+  logoText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  chem: {
+    backgroundColor: 'black',
+    color: 'white',
+    paddingHorizontal: 5,
+  },
+  pro: {
+    color: 'black',
+  },
+  privacyBox: {
+    backgroundColor: 'rgba(255, 255, 255, 0.3)', // Semi-transparent box
+    padding: 20,
+    borderRadius: 15,
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  privacyText: {
+    fontSize: 16,
+    textAlign: 'center',
+    fontWeight: '500',
+  },
+  italic: {
+    fontStyle: 'italic',
+  },
+  backButton: {
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    borderRadius: 10,
+  },
+  backText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
 
-export default ProfileScreen;
+export default PrivacyPolicyScreen;
